@@ -79,6 +79,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   }
   if(empty($_POST['login']) || empty($_POST['email'])) {
     // afficher un message d'erreur et ne pas soumettre les données
+    echo 'Something went wrong';
 } else {
-    // soumettre les données à la base de données
+    echo 'Account created';
 }

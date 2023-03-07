@@ -1,11 +1,12 @@
 <?php
+
 require '../inc/fonctions.php';
 require '../inc/pdo.php';
 
 
-$pseudo = $_POST['login'];
-$email = $_POST['email'];
-$password = $_POST['pwd'];
+ $pseudo = $_POST['login'];
+ $email = $_POST['email'];
+ $password = $_POST['pwd'];
 
 // Hashage du mot de passe
 $password_hash = password_hash($password, PASSWORD_DEFAULT);
@@ -14,13 +15,13 @@ $password_hash = password_hash($password, PASSWORD_DEFAULT);
 $created_at = date('Y-m-d H:i:s');
 
 // Insertion des données dans la base de données
-$requete = $conn->prepare('INSERT INTO user (login, email, pwd, created_at) VALUES (?, ?, ?, ?)');
-$requete->bindValue(':login', $_POST['login']);
-$requete->bindValue(':email', $_POST['email']);
-$requete->bindValue(':password', $password_hash);
-$requete->bindValue(':created_at', date('Y-m-d H:i:s'));
-
-$requete->execute([$pseudo, $email, $password_hash, $created_at]);
+$requete = 'INSERT INTO user (login, email, pwd, created_at) VALUES (:login, :email, :pwd, :created_at)';
+$sql = $conn->prepare($requete);
+$sql->bindValue(':login', $pseudo,PDO::PARAM_STR);
+$sql->bindValue(':email', $email, PDO::PARAM_STR);
+$sql->bindValue(':pwd', $password_hash , PDO::PARAM_STR);
+$sql->bindValue(':created_at', $created_at, PDO::PARAM_STR);
+$sql->execute();
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -34,7 +35,7 @@ $requete->execute([$pseudo, $email, $password_hash, $created_at]);
 
 <body>
     <h1>Formulaire inscription</h1>
-    <form action="" method="post">
+    <form method="POST">
     <label for="login">Pseudo :</label>
     <input type="text" id="login" name="login" required>
     
