@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') :
     else :
         //   if(password_verify($pwd,$resultatEmail['pwd'])) :
         $_SESSION['login'] = true;
-        header('Location: /php/movies/');
+        header('Location: ');
         exit();
     //   else:
     //     echo 'Le mot de passe est non valide.';

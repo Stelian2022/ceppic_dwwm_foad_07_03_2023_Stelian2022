@@ -1,6 +1,17 @@
 <?php
 require '../inc/fonctions.php';
 require '../inc/pdo.php';
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  
+    // Supprimez les variables associées aux champs du formulaire
+    unset($_POST['login']);
+    unset($_POST['email']);
+    unset($_POST['pwd']);
+    
+    // Redirigez l'utilisateur vers la page d'inscription (register) avec les champs vides
+    header("Location: index.php");
+    exit();
+  }
 // Récupération des données du formulaire
 $pseudo = $_POST['login'];
 $email = $_POST['email'];
