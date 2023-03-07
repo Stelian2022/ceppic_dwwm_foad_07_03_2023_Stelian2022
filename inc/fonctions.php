@@ -66,3 +66,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     header("Location: index.php");
     exit();
   }
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  
+    // Supprimez les variables associées aux champs du formulaire
+    unset($_POST['login']);
+    unset($_POST['email']);
+    unset($_POST['pwd']);
+    
+    // Redirigez l'utilisateur vers la page d'inscription (register) avec les champs vides
+    header("Location: index.php");
+    exit();
+  }
+  if(empty($_POST['login']) || empty($_POST['email'])) {
+    // afficher un message d'erreur et ne pas soumettre les données
+} else {
+    // soumettre les données à la base de données
+}
