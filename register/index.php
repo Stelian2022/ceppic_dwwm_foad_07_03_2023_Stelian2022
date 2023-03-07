@@ -15,6 +15,11 @@ $created_at = date('Y-m-d H:i:s');
 
 // Insertion des données dans la base de données
 $requete = $conn->prepare('INSERT INTO user (login, email, pwd, created_at) VALUES (?, ?, ?, ?)');
+$requete->bindValue(':login', $_POST['login']);
+$requete->bindValue(':email', $_POST['email']);
+$requete->bindValue(':password', $password_hash);
+$requete->bindValue(':created_at', date('Y-m-d H:i:s'));
+
 $requete->execute([$pseudo, $email, $password_hash, $created_at]);
 ?>
 <!DOCTYPE html>
